@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
 
-function App() {
+import { Routes, Route, Navigate } from "react-router-dom";
+
+import { connect } from 'react-redux'
+
+import { createStructuredSelector } from 'reselect';
+
+import Header from "./components/header/header.jsx";
+import HomePage from "./pages/homepage/homepage.jsx";
+import Authen from "./pages/authen/authen.jsx";
+import ShopPage from "./pages/shop/shop.jsx";
+import CheckOutPage from './pages/checkout/checkout.jsx'
+
+import { selectCurrentUser } from './redux/user/user-selector.js'
+
+import { checkUserSession } from './redux/user/user-action.js'
+
+import './App.css'
+
+
+const App = ({ currentUser, dispatch }) => {
+  useEffect(() => {
+    console.log("Hello")
+    dispatch(checkUserSession())
+  }, [dispatch])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={!currentUser ? < Authen /> : <Navigate to="/" />} />
+        <Route path="/shop/*" element={<ShopPage />} />
+        <Route path="/checkout" element={<CheckOutPage />} />
+      </Routes>
+    </div >
   );
-}
 
-export default App;
+};
+
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+})
+
+
+export default connect(mapStateToProps)(App);
+
