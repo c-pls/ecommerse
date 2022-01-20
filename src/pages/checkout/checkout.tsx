@@ -8,7 +8,7 @@ import {
 
 import CheckOutItem from "../../components/checkout-item/checkout-item.jsx";
 
-import StripeCheckoutButton from "../../components/stripe-button/stripe-button.jsx";
+import { StripeCheckoutButton } from "../../components/stripe-button/stripe-button";
 
 import "./checkout.scss";
 

@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import Header from "./components/header/header.jsx";
+import { Header } from "./components/header/header";
 import { HomePage } from "./pages/homepage/homepage";
 import { Authen } from "./pages/authen/authen";
 import { ShopPage } from "./pages/shop/shop";

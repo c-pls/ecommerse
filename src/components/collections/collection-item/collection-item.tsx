@@ -33,8 +33,7 @@ export const CollectionItem = ({ item }: Props) => {
         <span className="price">{price}</span>
       </div>
       <CustomButton
-        toggleFunction={() => {
-          console.log("Hello");
+        onClick={() => {
           dispatch(addItem(item));
         }}
         inverted={true}

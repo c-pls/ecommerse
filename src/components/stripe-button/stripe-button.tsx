@@ -1,15 +1,17 @@
 import React from "react";
-
 import axios from "axios";
 
 import StripeCheckout from "react-stripe-checkout";
+interface Props {
+  price: number;
+}
 
-const StripeCheckoutButton = ({ price }) => {
+export const StripeCheckoutButton = ({ price }: Props) => {
   const priceForStripe = price * 100;
   const publishableKey =
     "pk_test_51KHQULIha2TOW87OHGNc1DGluwhHXSp1OB4cx6shNswfWAja6n9QDimaAKdcJhT3iqrr3c5n8Ycs4PWiNfBlv6Bg00QkxGu5vY";
 
-  const onToken = (token) => {
+  const onToken = (token: number) => {
     console.log(token);
     axios({
       url: "payment",
@@ -24,8 +26,8 @@ const StripeCheckoutButton = ({ price }) => {
         alert("Payment success");
       })
       .catch((err) => {
-      console.log(err)
-        alert("Fail")
+        console.log(err);
+        alert("Fail");
       });
     // alert("Success")
   };
@@ -40,10 +42,8 @@ const StripeCheckoutButton = ({ price }) => {
       description={`Your total is $${price}`}
       amount={priceForStripe}
       panelLabel="Pay Now"
-      token={onToken}
+      token={() => onToken}
       stripeKey={publishableKey}
     />
   );
 };
-
-export default StripeCheckoutButton;

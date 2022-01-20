@@ -7,7 +7,6 @@ export const WithSpinner = (
   WrappedComponent: () => JSX.Element,
   isLoading: boolean
 ) => {
-  console.log(isLoading);
   return isLoading ? (
     <div className="spinner">
       <BallTriangle

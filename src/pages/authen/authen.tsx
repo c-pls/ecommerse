@@ -1,5 +1,5 @@
 import React from "react";
-import { Login } from "../../components/authen/login/login.tsx";
+import { Login } from "../../components/authen/login/login";
 import { Register } from "../../components/authen/register/register";
 
 import "./authen.scss";
