@@ -1,10 +1,8 @@
-import React from 'react'
-import Directory from '../../components/directory/directory.jsx'
+import React from "react";
+import { Directory } from "../../components/directory/directory.tsx";
 
 const HomePage = () => {
-  return (
-    <Directory />
-  )
-}
+  return <Directory />;
+};
 
-export default HomePage
+export default HomePage;

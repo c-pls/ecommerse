@@ -6,14 +6,12 @@ import { connect } from "react-redux";
 
 import { fetchCollectionStart } from "../../redux/shop/shop-action.js";
 
-import CollectionOverviewContainer from '../../components/collections/collection-overview/collection-overview-container.jsx'
-import CollectionPageContainer from '../collection/collection-container.jsx'
-
+import { CollectionPageContainer } from "../collection/collection-container";
+import { CollectionOverviewContainer } from "../../components/collections/collection-overview/collection-overview-container";
 
 const ShopPage = ({ dispatch }) => {
-
   useEffect(() => {
-    dispatch(fetchCollectionStart())
+    dispatch(fetchCollectionStart());
   }, [dispatch]);
 
   return (
@@ -24,6 +22,5 @@ const ShopPage = ({ dispatch }) => {
     </Routes>
   );
 };
-
 
 export default connect()(ShopPage);

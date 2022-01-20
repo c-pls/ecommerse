@@ -5,7 +5,7 @@ import { createStructuredSelector } from "reselect";
 
 import { useNavigate } from "react-router-dom";
 
-import CustomButton from "../../custom-button/custom-button.jsx";
+import { CustomButton } from "../../custom-button/custom-button";
 import CartItem from "../cart-item/cart-item.jsx";
 
 import { selectCartItems } from "../../../redux/cart/cart-selector.js";
