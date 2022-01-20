@@ -4,7 +4,7 @@ import { Register } from "../../components/authen/register/register";
 
 import "./authen.scss";
 
-const Authen = () => {
+export const Authen = () => {
   return (
     <div className="authen">
       <Login />
@@ -12,5 +12,3 @@ const Authen = () => {
     </div>
   );
 };
-
-export default Authen;

@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
-
 import { Routes, Route } from "react-router-dom";
-
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { fetchCollectionStart } from "../../redux/shop/shop-action.js";
 
 import { CollectionPageContainer } from "../collection/collection-container";
 import { CollectionOverviewContainer } from "../../components/collections/collection-overview/collection-overview-container";
 
-const ShopPage = ({ dispatch }) => {
+export const ShopPage = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchCollectionStart());
   }, [dispatch]);
@@ -22,5 +21,3 @@ const ShopPage = ({ dispatch }) => {
     </Routes>
   );
 };
-
-export default connect()(ShopPage);

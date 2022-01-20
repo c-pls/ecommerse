@@ -72,7 +72,7 @@ export const Login = () => {
 
           <CustomButton
             type="button"
-            toggleFunction={() => dispatch(googleSignInStart())}
+            onClick={() => dispatch(googleSignInStart())}
             isGoogleSignIn={true}
           >
             Sign in with Google

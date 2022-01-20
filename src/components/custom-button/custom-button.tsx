@@ -1,24 +1,25 @@
 import React from "react";
 import "./custom-button.scss";
-interface Props {
+
+interface ButtonProps
+  extends React.DetailedHTMLProps<
+      React.ButtonHTMLAttributes<HTMLButtonElement>,
+      HTMLButtonElement
+    >,
+    React.AriaAttributes {}
+
+interface ButtonProps {
   isGoogleSignIn?: boolean;
   inverted?: boolean;
   children?: string;
-  type?: "submit" | "reset" | "button" | undefined;
   toggleFunction?: (param: any) => void;
 }
 
-export const CustomButton = ({
-  isGoogleSignIn,
-  inverted,
-  children,
-  type,
-  toggleFunction,
-}: Props) => {
+export const CustomButton = (props: ButtonProps) => {
+  const { isGoogleSignIn, inverted, children, ...otherProps } = props;
   return (
     <button
-      type={type}
-      onClick={toggleFunction}
+      {...otherProps}
       className={`${isGoogleSignIn ? "google-sign-in" : ""}
         ${inverted ? "inverted" : ""}
               custom-button`}
