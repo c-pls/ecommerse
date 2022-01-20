@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { fetchCollectionStart } from "../../redux/shop/shop-action.js";
+import { fetchCollectionStart } from "../../redux/shop/shop-action";
 
 import { CollectionPageContainer } from "../collection/collection-container";
 import { CollectionOverviewContainer } from "../../components/collections/collection-overview/collection-overview-container";

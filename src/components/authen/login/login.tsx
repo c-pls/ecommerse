@@ -1,13 +1,9 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { auth, signInWithGoogle } from "../../../firebase/firebase-utils";
 
 import { CustomButton } from "../../custom-button/custom-button";
-
-import {
-  googleSignInStart,
-  emailSignInStart,
-} from "../../../redux/user/user-action.js";
 
 import "./login.scss";
 
@@ -21,9 +17,14 @@ export const Login = () => {
 
   const dispatch = useDispatch();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    dispatch(emailSignInStart(data));
-    reset();
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    const { email, password } = data;
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -72,7 +73,7 @@ export const Login = () => {
 
           <CustomButton
             type="button"
-            onClick={() => dispatch(googleSignInStart())}
+            onClick={signInWithGoogle}
             isGoogleSignIn={true}
           >
             Sign in with Google

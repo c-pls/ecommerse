@@ -1,9 +1,9 @@
 import React from "react";
 
-import { toggleDropDown } from "../../../redux/cart/cart-action.js";
+import { toggleDropDown } from "../../../redux/cart/cart-action";
 import { ReactComponent as ShoppingBag } from "../../../assets/shopping-bag.svg";
 
-import { selectCartItemsCount } from "../../../redux/cart/cart-selector.js";
+import { selectCartItemsCount } from "../../../redux/cart/cart-selector";
 
 import "./cart-icon.scss";
 import { useDispatch, useSelector } from "react-redux";

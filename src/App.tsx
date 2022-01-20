@@ -10,18 +10,36 @@ import { Authen } from "./pages/authen/authen";
 import { ShopPage } from "./pages/shop/shop";
 import { CheckOutPage } from "./pages/checkout/checkout";
 
-import { selectCurrentUser } from "./redux/user/user-selector.js";
+import { selectCurrentUser } from "./redux/user/user-selector";
 
-import { checkUserSession } from "./redux/user/user-action.js";
+import { auth, createUserProfile } from "./firebase/firebase-utils";
 
 import "./App.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { setCurrentUser } from "./redux/user/user-action";
 
 export const App = () => {
   const dispatch = useDispatch();
+
   const currentUser = useSelector(selectCurrentUser);
   useEffect(() => {
-    dispatch(checkUserSession());
+    const unsubscribe = auth.onAuthStateChanged(async (userAuth: any) => {
+      if (userAuth) {
+        const userRef = await createUserProfile(userAuth, null);
+        if (userRef) {
+          userRef.onSnapshot((snapShot: any) => {
+            dispatch(
+              setCurrentUser({
+                id: snapShot.id,
+                ...snapShot.data(),
+              })
+            );
+          });
+        }
+      }
+      dispatch(setCurrentUser(userAuth));
+    });
+    return () => unsubscribe();
   }, [dispatch]);
 
   return (

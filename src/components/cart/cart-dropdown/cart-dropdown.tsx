@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { CustomButton } from "../../custom-button/custom-button";
 import { CartItem } from "../cart-item/cart-item";
 
-import { selectCartItems } from "../../../redux/cart/cart-selector.js";
-import { toggleDropDown } from "../../../redux/cart/cart-action.js";
+import { selectCartItems } from "../../../redux/cart/cart-selector";
+import { toggleDropDown } from "../../../redux/cart/cart-action";
 
 import "./cart-dropdown.scss";
 

@@ -1,6 +1,8 @@
 import { createSelector } from "reselect";
 
-const selectShop = (state) => state.shop;
+import { GlobalState } from "./shop-constants";
+
+const selectShop = (state: GlobalState) => state.shop;
 
 export const selectShopItemData = createSelector(
   [selectShop],
@@ -15,5 +17,5 @@ export const selectCollectionsForPreview = createSelector(
 
 export const selectIsCollectionsLoaded = createSelector(
   [selectShop],
-  shopData => !!shopData.collections
-)
+  (shopData) => !!shopData.collections
+);

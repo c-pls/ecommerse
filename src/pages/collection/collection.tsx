@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectShopItemData } from "../../redux/shop/shop-selector.js";
+import { selectShopItemData } from "../../redux/shop/shop-selector";
 import { CollectionItem } from "../../components/collections/collection-item/collection-item";
 import "./collection.scss";
 

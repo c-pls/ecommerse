@@ -2,7 +2,7 @@ import React from "react";
 
 import { useDispatch } from "react-redux";
 import { CustomButton } from "../../custom-button/custom-button";
-import { addItem } from "../../../redux/cart/cart-action.js";
+import { addItem } from "../../../redux/cart/cart-action";
 
 import "./collection-item.scss";
 
@@ -10,13 +10,29 @@ interface Props {
   item: {
     id: number;
     name: string;
-    price: string;
+    price: number;
     imageUrl: string;
   };
 }
 
+interface CartItem {
+  quantity: number;
+  id: number;
+  name: string;
+  price: number;
+  imageUrl: string;
+}
+
 export const CollectionItem = ({ item }: Props) => {
-  const { name, price, imageUrl } = item;
+  const { id, name, price, imageUrl } = item;
+
+  const itemToAdd: CartItem = {
+    name: name,
+    price: price,
+    imageUrl: imageUrl,
+    quantity: 1,
+    id: id,
+  };
   const dispatch = useDispatch();
 
   return (
@@ -34,7 +50,7 @@ export const CollectionItem = ({ item }: Props) => {
       </div>
       <CustomButton
         onClick={() => {
-          dispatch(addItem(item));
+          dispatch(addItem(itemToAdd));
         }}
         inverted={true}
       >

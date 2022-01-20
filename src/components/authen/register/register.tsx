@@ -1,8 +1,7 @@
 import React from "react";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { signUpStart } from "../../../redux/user/user-action.js";
+import { auth, createUserProfile } from "../../../firebase/firebase-utils";
 import { CustomButton } from "../../custom-button/custom-button";
 import "./register.scss";
 
@@ -16,16 +15,24 @@ interface FormValues {
 export const Register = () => {
   const { register, handleSubmit, watch, reset } = useForm<FormValues>();
 
-  const dispatch = useDispatch();
-
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const { password, confirmPassword } = data;
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    const { email, displayName, password, confirmPassword } = data;
     reset();
     if (password !== confirmPassword) {
       alert("passwords don't match");
       return;
     }
-    dispatch(signUpStart(data));
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      if (user) {
+        await createUserProfile(user, { displayName });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

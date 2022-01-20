@@ -1,12 +1,12 @@
-import { userAction } from "./user-action-types.js";
+import { userAction, INIT_STATE, UserAction } from "./user-constants";
 
-const INIT_STATE = {
-  currentUser: null,
-  error: null,
-};
-
-const userReducer = (state = INIT_STATE, action) => {
+const userReducer = (state = INIT_STATE, action: UserAction) => {
   switch (action.type) {
+    case "SET_CURRENT_USER":
+      return {
+        ...state,
+        currentUser: action.payload,
+      };
     case userAction.SIGN_IN_SUCCESS:
       return {
         ...state,
@@ -19,7 +19,6 @@ const userReducer = (state = INIT_STATE, action) => {
         currentUser: null,
         error: null,
       };
-
 
     case userAction.SIGN_IN_FAILURE:
     case userAction.SIGN_OUT_FAILURE:
