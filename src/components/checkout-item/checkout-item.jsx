@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 
 import {
   clearItemFromCart,
@@ -9,17 +9,7 @@ import {
 } from "../../redux/cart/cart-action";
 import "./checkout-item.scss";
 
-interface CartItem {
-  cartItem: {
-    id: number;
-    name: string;
-    imageUrl: string;
-    price: number;
-    quantity: number;
-  };
-}
-export const CheckOutItem = ({ cartItem }: CartItem) => {
-  const dispatch = useDispatch();
+const CheckOutItem = ({ cartItem, dispatch }) => {
   const { name, imageUrl, price, quantity } = cartItem;
   return (
     <div className="checkout-item">
@@ -46,3 +36,5 @@ export const CheckOutItem = ({ cartItem }: CartItem) => {
     </div>
   );
 };
+
+export default connect()(CheckOutItem);
