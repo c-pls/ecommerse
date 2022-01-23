@@ -13,7 +13,7 @@ import { auth, createUserProfile } from "../../firebase/firebase-utils";
 import "./App.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { User } from "../../model/model";
-import { cartItemsVar, userVar } from "../../graphql/cache";
+import { userVar } from "../../graphql/cache";
 
 export const App = () => {
   const currentUser = userVar();

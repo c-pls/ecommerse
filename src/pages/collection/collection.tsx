@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import { CollectionItem } from "../../components/collections/collection-item/collection-item";
 import "./collection.scss";
@@ -10,17 +9,6 @@ interface Item {
   name: string;
   price: number;
   imageUrl: string;
-}
-
-interface Collection {
-  id: number;
-  title: string;
-  items: Item[];
-  routeName: string;
-}
-
-interface Collections<Collection> {
-  [key: string]: Collection;
 }
 
 const GET_COLLECTION_BY_TITLE = gql`
