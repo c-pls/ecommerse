@@ -4,20 +4,20 @@ import { useDispatch } from "react-redux";
 
 import { fetchCollectionStart } from "../../redux/shop/shop-action";
 
-import { CollectionPageContainer } from "../collection/collection-container";
-import { CollectionOverviewContainer } from "../../components/collections/collection-overview/collection-overview-container";
+import { CollectionPage } from "../collection/collection";
+import { CollectionOverview } from "../../components/collections/collection-overview/collection-overview";
 
 export const ShopPage = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchCollectionStart());
-  }, [dispatch]);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(fetchCollectionStart());
+  // }, [dispatch]);
 
   return (
     <Routes>
-      <Route path="/" element={<CollectionOverviewContainer />} />
+      <Route path="/" element={<CollectionOverview />} />
 
-      <Route path="/:collectionName" element={<CollectionPageContainer />} />
+      <Route path="/:collectionName" element={<CollectionPage />} />
     </Routes>
   );
 };

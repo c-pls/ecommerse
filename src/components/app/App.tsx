@@ -4,19 +4,19 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { Header } from "./components/header/header";
-import { HomePage } from "./pages/homepage/homepage";
-import { Authen } from "./pages/authen/authen";
-import { ShopPage } from "./pages/shop/shop";
-import { CheckOutPage } from "./pages/checkout/checkout";
+import { Header } from "../header/header";
+import { HomePage } from "../../pages/homepage/homepage";
+import { Authen } from "../../pages/authen/authen";
+import { ShopPage } from "../../pages/shop/shop";
+import { CheckOutPage } from "../../pages/checkout/checkout";
 
-import { selectCurrentUser } from "./redux/user/user-selector";
+import { selectCurrentUser } from "../../redux/user/user-selector";
 
-import { auth, createUserProfile } from "./firebase/firebase-utils";
+import { auth, createUserProfile } from "../../firebase/firebase-utils";
 
 import "./App.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import { setCurrentUser } from "./redux/user/user-action";
+import { setCurrentUser } from "../../redux/user/user-action";
 
 export const App = () => {
   const dispatch = useDispatch();
