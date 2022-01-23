@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import { auth, signInWithGoogle } from "../../../firebase/firebase-utils";
 
 import { CustomButton } from "../../custom-button/custom-button";
@@ -14,8 +13,6 @@ interface FormValues {
 
 export const Login = () => {
   const { register, handleSubmit, watch, reset } = useForm<FormValues>();
-
-  const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const { email, password } = data;

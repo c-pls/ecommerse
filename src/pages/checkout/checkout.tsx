@@ -1,16 +1,12 @@
 import React from "react";
 
-import { useSelector } from "react-redux";
-import {
-  selectCartItems,
-  selectCartTotal,
-} from "../../redux/cart/cart-selector";
-
 import { CheckOutItem } from "../../components/checkout-item/checkout-item";
 
 import { StripeCheckoutButton } from "../../components/stripe-button/stripe-button";
 
 import "./checkout.scss";
+import { useReactiveVar } from "@apollo/client";
+import { cartItemsVar, totalPriceVar } from "../../graphql/cache";
 
 interface CartItemProps {
   id: number;
@@ -21,8 +17,8 @@ interface CartItemProps {
 }
 
 export const CheckOutPage = () => {
-  const cartItems: CartItemProps[] = useSelector(selectCartItems);
-  const totalPrice: number = useSelector(selectCartTotal);
+  const cartItems: CartItemProps[] = useReactiveVar(cartItemsVar);
+  const totalPrice: number = useReactiveVar(totalPriceVar);
   return (
     <div className="checkout-page">
       <div className="checkout-header">

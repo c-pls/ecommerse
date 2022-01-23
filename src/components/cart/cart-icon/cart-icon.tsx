@@ -1,18 +1,17 @@
 import React from "react";
 
-import { toggleDropDown } from "../../../redux/cart/cart-action";
 import { ReactComponent as ShoppingBag } from "../../../assets/shopping-bag.svg";
 
-import { selectCartItemsCount } from "../../../redux/cart/cart-selector";
-
 import "./cart-icon.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { toggleCart } from "../../../graphql/operation/cart/toggleHidden";
+import { useReactiveVar } from "@apollo/client";
+import { cartItemsVar } from "../../../graphql/cache";
 
 export const CartIcon = () => {
-  const dispatch = useDispatch();
-  const itemCount: number = useSelector(selectCartItemsCount);
+  const itemCount: number = useReactiveVar(cartItemsVar).length;
+
   return (
-    <div className="cart-icon" onClick={() => dispatch(toggleDropDown())}>
+    <div className="cart-icon" onClick={toggleCart}>
       <ShoppingBag />
       <span className="item-count">{itemCount}</span>
     </div>

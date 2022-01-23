@@ -1,8 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
 import { CollectionItem } from "../collection-item/collection-item";
-
 import "./collection-preview.scss";
 
 interface Item {
@@ -15,14 +13,16 @@ interface Item {
 interface Props {
   title: string;
   items: Item[];
-  routeName: string;
 }
 
-export const CollectionPreview = ({ title, items, routeName }: Props) => {
+export const CollectionPreview = ({ title, items }: Props) => {
   const navigate = useNavigate();
   return (
     <div className="collection-preview">
-      <h1 className="title" onClick={() => navigate(`${routeName}`)}>
+      <h1
+        className="title"
+        onClick={() => navigate(`${title.toLocaleLowerCase()}`)}
+      >
         {title.toUpperCase()}
       </h1>
       <div className="preview">

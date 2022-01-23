@@ -1,33 +1,26 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
 
 import { CustomButton } from "../../custom-button/custom-button";
-import { CartItem } from "../cart-item/cart-item";
-
-import { selectCartItems } from "../../../redux/cart/cart-selector";
-import { toggleDropDown } from "../../../redux/cart/cart-action";
+import { CartItemComponent } from "../cart-item/cart-item";
 
 import "./cart-dropdown.scss";
-
-interface CartItemProps {
-  id: number;
-  name: string;
-  imageUrl: string;
-  quantity: number;
-  price: number;
-}
+import { useReactiveVar } from "@apollo/client";
+import { cartItemsVar } from "../../../graphql/cache";
+import { toggleCart } from "../../../graphql/operation/cart/toggleHidden";
+import { CartItems } from "../../../model/model";
 
 export const CartDropDown = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const cartItems: Array<CartItemProps> = useSelector(selectCartItems);
+  const cartItems: CartItems = useReactiveVar(cartItemsVar);
   return (
     <div className="cart-dropdown">
       <div className="cart-items">
         {cartItems.length ? (
-          cartItems.map((item) => <CartItem key={item.id} item={item} />)
+          cartItems.map((item) => (
+            <CartItemComponent key={item.id} item={item} />
+          ))
         ) : (
           <span className="empty-string">Your cart is empty</span>
         )}
@@ -36,7 +29,7 @@ export const CartDropDown = () => {
         <CustomButton
           onClick={() => {
             navigate("/checkout");
-            dispatch(toggleDropDown());
+            toggleCart();
           }}
         >
           Go to Checkout

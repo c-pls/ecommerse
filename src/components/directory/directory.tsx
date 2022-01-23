@@ -1,10 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { selectDirectoryData } from "../../redux/directory/directory-selector";
-
 import { MenuItem } from "../menu-item/menu-item-component";
-
+import { sections } from "./directory-data";
 import "./directory.scss";
 
 interface DirectoryData {
@@ -12,11 +10,10 @@ interface DirectoryData {
   title: string;
   imageUrl: string;
   size?: string;
-  routeName: string;
 }
 
 export const Directory = () => {
-  const directoryData: DirectoryData[] = useSelector(selectDirectoryData);
+  const directoryData: DirectoryData[] = sections;
   //   const x = useSelector(
   //     createStructuredSelector({
   //       data: selectDirectoryData,

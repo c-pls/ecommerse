@@ -1,6 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { selectCollectionsForPreview } from "../../../redux/shop/shop-selector";
 
 import { gql, useQuery } from "@apollo/client";
 import { CollectionPreview } from "../collection-preview/collection-preview";
@@ -17,7 +15,6 @@ interface Collection {
   id: number;
   title: string;
   items: Item[];
-  routeName: string;
 }
 
 const GET_COLLECTIONS = gql`
@@ -36,7 +33,6 @@ const GET_COLLECTIONS = gql`
 `;
 
 export const CollectionOverview = () => {
-  // const collections: Collection[] = useSelector(selectCollectionsForPreview);
   const { loading, error, data } = useQuery(GET_COLLECTIONS);
   if (error) {
     return <div>Error</div>;

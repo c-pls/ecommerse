@@ -8,11 +8,6 @@ import { CollectionPage } from "../collection/collection";
 import { CollectionOverview } from "../../components/collections/collection-overview/collection-overview";
 
 export const ShopPage = () => {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchCollectionStart());
-  // }, [dispatch]);
-
   return (
     <Routes>
       <Route path="/" element={<CollectionOverview />} />

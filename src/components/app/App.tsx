@@ -2,45 +2,38 @@ import React, { useEffect } from "react";
 
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
-
 import { Header } from "../header/header";
 import { HomePage } from "../../pages/homepage/homepage";
 import { Authen } from "../../pages/authen/authen";
 import { ShopPage } from "../../pages/shop/shop";
 import { CheckOutPage } from "../../pages/checkout/checkout";
 
-import { selectCurrentUser } from "../../redux/user/user-selector";
-
 import { auth, createUserProfile } from "../../firebase/firebase-utils";
 
 import "./App.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import { setCurrentUser } from "../../redux/user/user-action";
+import { User } from "../../model/model";
+import { cartItemsVar, userVar } from "../../graphql/cache";
 
 export const App = () => {
-  const dispatch = useDispatch();
-
-  const currentUser = useSelector(selectCurrentUser);
+  const currentUser = userVar();
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (userAuth: any) => {
       if (userAuth) {
         const userRef = await createUserProfile(userAuth, null);
         if (userRef) {
           userRef.onSnapshot((snapShot: any) => {
-            dispatch(
-              setCurrentUser({
-                id: snapShot.id,
-                ...snapShot.data(),
-              })
-            );
+            const user: User = {
+              id: snapShot.id,
+              ...snapShot.data(),
+            };
+            userVar(user);
           });
         }
       }
-      dispatch(setCurrentUser(userAuth));
     });
     return () => unsubscribe();
-  }, [dispatch]);
+  }, []);
 
   return (
     <div>

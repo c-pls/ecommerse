@@ -1,39 +1,21 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
 import { CustomButton } from "../../custom-button/custom-button";
-import { addItem } from "../../../redux/cart/cart-action";
+import { addItem } from "../../../graphql/operation/cart/addItemToCart";
+import { CartItem, CollectionItemProps } from "../../../model/model";
 
 import "./collection-item.scss";
 
 interface Props {
-  item: {
-    id: number;
-    name: string;
-    price: number;
-    imageUrl: string;
-  };
-}
-
-interface CartItem {
-  quantity: number;
-  id: number;
-  name: string;
-  price: number;
-  imageUrl: string;
+  item: CollectionItemProps;
 }
 
 export const CollectionItem = ({ item }: Props) => {
   const { id, name, price, imageUrl } = item;
-
   const itemToAdd: CartItem = {
-    name: name,
-    price: price,
-    imageUrl: imageUrl,
+    ...item,
     quantity: 1,
-    id: id,
   };
-  const dispatch = useDispatch();
 
   return (
     <div className="collection-item">
@@ -50,7 +32,7 @@ export const CollectionItem = ({ item }: Props) => {
       </div>
       <CustomButton
         onClick={() => {
-          dispatch(addItem(itemToAdd));
+          addItem(itemToAdd);
         }}
         inverted={true}
       >

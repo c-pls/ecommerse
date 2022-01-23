@@ -8,16 +8,15 @@ interface Props {
   title: string;
   imageUrl: string;
   size?: string;
-  routeName: string;
 }
 
-export const MenuItem = ({ title, imageUrl, size, routeName }: Props) => {
+export const MenuItem = ({ title, imageUrl, size }: Props) => {
   const navigate = useNavigate();
 
   return (
     <div
       className={`${size} menu-item`}
-      onClick={() => navigate(`shop/${routeName}`)}
+      onClick={() => navigate(`shop/${title}`)}
     >
       <div
         className="background-image"

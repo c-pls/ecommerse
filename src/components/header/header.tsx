@@ -1,21 +1,21 @@
 import React from "react";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 
 import { CartIcon } from "../cart/cart-icon/cart-icon";
 import { CartDropDown } from "../cart/cart-dropdown/cart-dropdown";
 
-import { selectCurrentUser } from "../../redux/user/user-selector";
-import { selectCartHidden } from "../../redux/cart/cart-selector";
-
 import "./header.scss";
-import { useSelector } from "react-redux";
 import { auth } from "../../firebase/firebase-utils";
+import { useReactiveVar } from "@apollo/client";
+import { cartHiddenVar, cartItemsVar, userVar } from "../../graphql/cache";
 
 export const Header = () => {
-  const currentUser = useSelector(selectCurrentUser);
-  const hidden = useSelector(selectCartHidden);
+  const currentUser = useReactiveVar(userVar);
+  const hidden = useReactiveVar(cartHiddenVar);
+  const navigate = useNavigate();
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -30,7 +30,15 @@ export const Header = () => {
           CONTACT
         </Link>
         {currentUser ? (
-          <div className="option" onClick={() => auth.signOut()}>
+          <div
+            className="option"
+            onClick={() => {
+              auth.signOut();
+              navigate("/");
+              userVar(null!);
+              cartItemsVar([]);
+            }}
+          >
             SIGN OUT
           </div>
         ) : (

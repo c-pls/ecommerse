@@ -1,25 +1,12 @@
-import React from "react";
+import { addItem, removeItem, clearItem } from "../../graphql/operation/index";
 
-import { useDispatch } from "react-redux";
-
-import {
-  clearItemFromCart,
-  removeItem,
-  addItem,
-} from "../../redux/cart/cart-action";
 import "./checkout-item.scss";
-
-interface CartItem {
-  cartItem: {
-    id: number;
-    name: string;
-    imageUrl: string;
-    price: number;
-    quantity: number;
-  };
+import { CartItem } from "../../model/model";
+interface CartItemProps {
+  cartItem: CartItem;
 }
-export const CheckOutItem = ({ cartItem }: CartItem) => {
-  const dispatch = useDispatch();
+
+export const CheckOutItem = ({ cartItem }: CartItemProps) => {
   const { name, imageUrl, price, quantity } = cartItem;
   return (
     <div className="checkout-item">
@@ -28,19 +15,16 @@ export const CheckOutItem = ({ cartItem }: CartItem) => {
       </div>
       <span className="name">{name}</span>
       <span className="quantity">
-        <div className="arrow" onClick={() => dispatch(removeItem(cartItem))}>
+        <div className="arrow" onClick={() => removeItem(cartItem)}>
           &#10094;
         </div>
         <span className="value">{quantity}</span>
-        <div className="arrow" onClick={() => dispatch(addItem(cartItem))}>
+        <div className="arrow" onClick={() => addItem(cartItem)}>
           &#10095;
         </div>
       </span>
       <span className="price">{price}</span>
-      <div
-        className="remove-button"
-        onClick={() => dispatch(clearItemFromCart(cartItem))}
-      >
+      <div className="remove-button" onClick={() => clearItem(cartItem)}>
         &#10005;
       </div>
     </div>

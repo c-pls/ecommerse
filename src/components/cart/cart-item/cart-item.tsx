@@ -1,18 +1,12 @@
 import React from "react";
-
+import { CartItem } from "../../../model/model";
 import "./cart-item.scss";
 
 interface Props {
-  item: {
-    id: number;
-    name: string;
-    imageUrl: string;
-    quantity: number;
-    price: number;
-  };
+  item: CartItem;
 }
 
-export const CartItem = ({ item }: Props) => {
+export const CartItemComponent = ({ item }: Props) => {
   const { imageUrl, name, quantity, price } = item;
   return (
     <div className="cart-item">

@@ -44,7 +44,6 @@ export const CollectionPage = () => {
   const { loading, error, data } = useQuery(GET_COLLECTION_BY_TITLE, {
     variables: { title: collectionName },
   });
-  console.log(data);
   if (error) {
     return <div>Error</div>;
   }
@@ -52,7 +51,6 @@ export const CollectionPage = () => {
     return <Spinner />;
   } else {
     const collection = data.getCollectionsByTitle;
-    console.log(collection);
     const { title, items } = collection;
     return (
       <div className="collection-page">

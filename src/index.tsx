@@ -1,22 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { AppWrapper } from "./components/app/AppWrapper";
+import { App } from "./components/app/App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
-import { store, persistor } from "./redux/store";
-
-import { PersistGate } from "redux-persist/integration/react";
+import { ApolloClient, ApolloProvider } from "@apollo/client";
+import { cache } from "./graphql/cache";
+const client = new ApolloClient({
+  uri: "https://crwn-clothing.com/",
+  cache: cache,
+});
 
 ReactDOM.render(
-  <Provider store={store}>
+  <ApolloProvider client={client}>
     <BrowserRouter>
-      <PersistGate persistor={persistor}>
-        <AppWrapper />
-      </PersistGate>
+      <App />
     </BrowserRouter>
-  </Provider>,
+  </ApolloProvider>,
+
   document.getElementById("root")
 );
 
