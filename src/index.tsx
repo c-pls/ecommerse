@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ApolloClient, ApolloProvider } from "@apollo/client";
 import { cache } from "./graphql/cache";
 const client = new ApolloClient({
-  uri: "https://crwn-clothing.com/",
+  uri: "http://localhost:4000/",
   cache: cache,
 });
 
